@@ -1,0 +1,19 @@
+{
+  "name": "Sharpe EduQuality Connect",
+  "short_name": "Sharpe Quality",
+  "description": "Quality assurance and institutional improvement prototype for Sam Sharpe Teachers' College.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fb",
+  "theme_color": "#0b3d91",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

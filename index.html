@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sharpe EduQuality Connect</title>
+    <meta name="theme-color" content="#0b3d91" />
+    <meta name="description" content="Sharpe EduQuality Connect quality assurance platform prototype for Sam Sharpe Teachers' College." />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css?v=3" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-label="Quality assurance symbol">
+          <span class="quality-ring"></span>
+          <span class="quality-check">✓</span>
+        </div>
+        <div>
+          <strong>Sharpe EduQuality Connect</strong>
+          <span>Quality Assurance Hub</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="notices">Notices</button>
+        <button class="nav-item" data-view="surveys">Surveys</button>
+        <button class="nav-item" data-view="feedback">Feedback</button>
+        <button class="nav-item" data-view="resources">Resources</button>
+        <button class="nav-item" data-view="qualitybot">QualityBot</button>
+        <button class="nav-item" data-view="admin">Admin</button>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Phase 1 MVP</p>
+          <h1 id="page-title">Home Dashboard</h1>
+        </div>
+        <div class="account-card">
+          <label>
+            Sam Sharpe Email
+            <input id="user-email" type="email" placeholder="name@samsharpe.edu.jm" />
+          </label>
+          <div class="profile">
+            <span class="status-dot"></span>
+            <span id="user-role-label">Guest Access</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active-view">
+        <section class="welcome-panel">
+          <div>
+            <p class="eyebrow">Welcome</p>
+            <h2>Sam Sharpe Teachers' College Quality Assurance Office</h2>
+            <p>
+              Welcome to Sharpe EduQuality Connect, the digital home for quality assurance, communication,
+              evidence gathering, and continuous improvement at Sam Sharpe Teachers' College.
+              This platform supports students, academic staff, administrative staff, ancillary staff,
+              department heads, and management by making quality processes easier to understand,
+              access, and act on.
+            </p>
+          </div>
+          <div class="welcome-note">
+            <strong>Why Quality Assurance Matters</strong>
+            <p>
+              Quality assurance helps the college maintain high standards in teaching, learning,
+              student support, institutional accountability, compliance, and service delivery.
+              It gives every stakeholder a voice, strengthens decision-making, and helps the college
+              provide evidence of improvement for ISO 21001, J-TEC, JBTE, TCJ, and Ministry
+              requirements.
+            </p>
+          </div>
+        </section>
+
+        <section class="statement-strip">
+          <article>
+            <span>Vision</span>
+            <strong>Quality through excellence, accountability, and continuous improvement.</strong>
+          </article>
+          <article>
+            <span>Quality Statement</span>
+            <strong>Sam Sharpe Teachers' College listens, monitors, improves, and supports quality across the college.</strong>
+          </article>
+        </section>
+
+        <section class="contact-strip dashboard-contact" aria-label="Quality Assurance contact information">
+          <article>
+            <span>Quality Assurance Department Email</span>
+            <strong><a href="mailto:quality.assurance@samsharpe.edu.jm">quality.assurance@samsharpe.edu.jm</a></strong>
+          </article>
+          <article>
+            <span>Tel/CUG</span>
+            <strong><a href="tel:8763331851">876-333-1851</a></strong>
+          </article>
+        </section>
+
+        <div class="metric-grid">
+          <article class="metric">
+            <span>Open Feedback</span>
+            <strong id="open-feedback-count">0</strong>
+          </article>
+          <article class="metric">
+            <span>Active Surveys</span>
+            <strong>3</strong>
+          </article>
+          <article class="metric">
+            <span>Resource Files</span>
+            <strong>8</strong>
+          </article>
+          <article class="metric">
+            <span>QA Notices</span>
+            <strong>4</strong>
+          </article>
+        </div>
+
+        <div class="two-column">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Latest Announcements</h2>
+              <button class="text-button" data-view-jump="notices">View All</button>
+            </div>
+            <div id="dashboard-notices" class="stack"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Quick Actions</h2>
+            </div>
+            <div class="quick-actions">
+              <button data-view-jump="feedback">Submit Feedback</button>
+              <button data-view-jump="surveys">Complete Survey</button>
+              <button data-view-jump="resources">Find Policy</button>
+              <button data-view-jump="qualitybot">Ask QualityBot</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="notices" class="view">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Notices and Announcements</h2>
+          </div>
+          <form id="notice-form" class="form-grid">
+            <label>
+              Title
+              <input id="notice-title" required placeholder="Example: ISO sensitisation workshop" />
+            </label>
+            <label>
+              Category
+              <select id="notice-category">
+                <option>QA Notice</option>
+                <option>J-TEC Reminder</option>
+                <option>Ministry Notice</option>
+                <option>Audit Update</option>
+              </select>
+            </label>
+            <label class="full">
+              Message
+              <textarea id="notice-message" required placeholder="Write the announcement here"></textarea>
+            </label>
+            <button type="submit">Post Notice</button>
+          </form>
+        </div>
+        <div id="notice-list" class="card-grid"></div>
+      </section>
+
+      <section id="surveys" class="view">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Surveys and Evaluations</h2>
+          </div>
+          <div id="survey-list" class="card-grid"></div>
+        </div>
+      </section>
+
+      <section id="feedback" class="view">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Feedback, Complaints, and Suggestions</h2>
+          </div>
+          <div class="notice-item feedback-help">
+            <strong>Suggestion Forms</strong>
+            <p>
+              Use the button below to connect users to the official suggestion forms once the form link is ready.
+              The form on this page can also be used to record tickets inside the app.
+            </p>
+            <a id="complaint-link" class="link-button" href="#" target="_blank" rel="noreferrer">Suggestion Forms</a>
+          </div>
+          <form id="feedback-form" class="form-grid">
+            <label>
+              Your Sam Sharpe Email
+              <input id="feedback-email" type="email" placeholder="johnhenry@samsharpe.edu.jm or mary.jones@samsharpe.edu.jm" />
+            </label>
+            <label>
+              User Type
+              <input id="feedback-user-type" value="Guest Access" readonly />
+            </label>
+            <label>
+              Type
+              <select id="feedback-type">
+                <option>Complaint</option>
+                <option>Concern</option>
+                <option>Suggestion</option>
+                <option>Positive Feedback</option>
+              </select>
+            </label>
+            <label>
+              Category
+              <select id="feedback-category">
+                <option>Academic Issues</option>
+                <option>Registry</option>
+                <option>Accounts</option>
+                <option>Library</option>
+                <option>IT</option>
+                <option>Student Success Centre</option>
+                <option>Guidance and Counselling</option>
+                <option>Facilities</option>
+                <option>Tuckshop</option>
+                <option>Canteen</option>
+                <option>Health and Wellness Unit</option>
+                <option>Examination Centre</option>
+                <option>Teaching and Learning</option>
+              </select>
+            </label>
+            <label>
+              Assigned Department
+              <select id="feedback-department">
+                <option>Quality Assurance Office</option>
+                <option>Academic Affairs</option>
+                <option>Registry</option>
+                <option>Accounts</option>
+                <option>Library</option>
+                <option>Information Technology</option>
+                <option>Student Success Centre</option>
+                <option>Guidance and Counselling</option>
+                <option>Facilities</option>
+                <option>Security</option>
+                <option>Tuckshop</option>
+                <option>Canteen</option>
+                <option>Health and Wellness Unit</option>
+                <option>Examination Centre</option>
+                <option value="Human Resource Department" data-staff-only="true">Human Resource Department - Staff Only</option>
+              </select>
+            </label>
+            <label>
+              Contact Email or Phone
+              <input id="feedback-contact" placeholder="Optional if not anonymous" />
+            </label>
+            <label>
+              Service Rating
+              <select id="feedback-rating">
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Very Good</option>
+                <option value="3">3 - Satisfactory</option>
+                <option value="2">2 - Needs Improvement</option>
+                <option value="1">1 - Poorest</option>
+              </select>
+            </label>
+            <label class="full">
+              Details
+              <textarea id="feedback-details" required placeholder="Describe the issue or suggestion"></textarea>
+            </label>
+            <label class="check-row full">
+              <input id="feedback-anonymous" type="checkbox" />
+              Submit anonymously
+            </label>
+            <button type="submit">Submit Ticket</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Ticket Tracking</h2>
+          </div>
+          <div id="feedback-list" class="stack"></div>
+        </div>
+      </section>
+
+      <section id="resources" class="view">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>College Resources</h2>
+          </div>
+          <div class="notice-item feedback-help">
+            <strong>Sam Sharpe Teachers' College Resource Library</strong>
+            <p>
+              This area provides quick access to important college documents, manuals, plans,
+              policies, and quality assurance resources. Add the official document links in the app
+              when they are ready.
+            </p>
+          </div>
+          <input id="resource-search" class="search" placeholder="Search policies, handbooks, standards, templates..." />
+          <div id="resource-list" class="card-grid"></div>
+        </div>
+      </section>
+
+      <section id="qualitybot" class="view">
+        <div class="chat-layout">
+          <section class="panel chat-panel">
+            <div class="panel-heading">
+              <h2>QualityBot</h2>
+            </div>
+            <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+            <form id="chat-form" class="chat-form">
+              <input id="chat-input" placeholder="Ask about policies, surveys, complaints, ISO, J-TEC..." />
+              <button type="submit">Ask</button>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Suggested Questions</h2>
+            </div>
+            <div class="stack">
+              <button class="question-chip">How do I submit a complaint?</button>
+              <button class="question-chip">What is the plagiarism policy?</button>
+              <button class="question-chip">Explain the assessment policy</button>
+              <button class="question-chip">Where can I find college policies?</button>
+              <button class="question-chip">What is quality assurance?</button>
+              <button class="question-chip">When are course reports due?</button>
+              <button class="question-chip">What does J-TEC require?</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="admin" class="view">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>QA Office Admin Dashboard</h2>
+          </div>
+          <div class="notice-item feedback-help">
+            <strong>Management Overview</strong>
+            <p>
+              This area helps the Quality Assurance Office monitor feedback, survey completion,
+              academic audits, policy reviews, department reports, and major compliance deadlines.
+            </p>
+          </div>
+          <div class="admin-grid">
+            <article>
+              <span>Survey Completion</span>
+              <div class="bar"><span style="width: 68%"></span></div>
+              <strong>68%</strong>
+            </article>
+            <article>
+              <span>Average Response Time</span>
+              <div class="bar"><span style="width: 42%"></span></div>
+              <strong>2.1 days</strong>
+            </article>
+            <article>
+              <span>Policy Review Progress</span>
+              <div class="bar"><span style="width: 76%"></span></div>
+              <strong>76%</strong>
+            </article>
+            <article>
+              <span>ISO Evidence Uploads</span>
+              <div class="bar"><span style="width: 54%"></span></div>
+              <strong>54%</strong>
+            </article>
+          </div>
+        </div>
+
+        <div class="admin-section-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Survey Monitoring</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row">
+                <strong>Staff Satisfaction Survey</strong>
+                <span>Deadline: May 31, 2026</span>
+                <div class="bar"><span style="width: 55%"></span></div>
+              </article>
+              <article class="admin-row">
+                <strong>Department Service Survey</strong>
+                <span>Deadline: May 31, 2026</span>
+                <div class="bar"><span style="width: 48%"></span></div>
+              </article>
+              <article class="admin-row">
+                <strong>UWI Quality Evaluation Survey Template</strong>
+                <span>Due: June 30, 2026</span>
+                <div class="bar"><span style="width: 32%"></span></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Quality Audit Monitoring</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row">
+                <strong>Mathematics Department</strong>
+                <span class="tag">Planned</span>
+                <p>Evidence checklist and audit schedule pending confirmation.</p>
+              </article>
+              <article class="admin-row">
+                <strong>Professional Studies Department</strong>
+                <span class="tag">Planned</span>
+                <p>Department files, course outlines, and QA evidence to be reviewed.</p>
+              </article>
+              <article class="admin-row">
+                <strong>Modern Languages Department</strong>
+                <span class="tag">Planned</span>
+                <p>Programme documents and teaching and learning evidence to be reviewed.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Policy Review Status</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row">
+                <strong>Staff Handbook</strong>
+                <span>Owner: Human Resource / Administration</span>
+                <p>Review status: In progress</p>
+              </article>
+              <article class="admin-row">
+                <strong>Student Handbook</strong>
+                <span>Owner: Student Services / Academic Affairs</span>
+                <p>Review status: Awaiting final update</p>
+              </article>
+              <article class="admin-row">
+                <strong>Quality Assurance Manual</strong>
+                <span>Owner: QA Office</span>
+                <p>Review status: Active review</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Upcoming QA Deadlines</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row deadline-row">
+                <strong>May 31, 2026</strong>
+                <p>Staff Satisfaction Survey and Department Service Survey completion.</p>
+              </article>
+              <article class="admin-row deadline-row">
+                <strong>June 30, 2026</strong>
+                <p>UWI Quality Evaluation Survey Template submission.</p>
+              </article>
+              <article class="admin-row deadline-row">
+                <strong>May 17-21, 2027</strong>
+                <p>UWI Quality Assurance Unit visit.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Department Reporting Status</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row">
+                <strong>Monthly Department Reports</strong>
+                <span class="tag">Monitor</span>
+                <p>Track report submission, late reports, and missing evidence.</p>
+              </article>
+              <article class="admin-row">
+                <strong>Course Reports</strong>
+                <span class="tag">Monitor</span>
+                <p>Track course report completion and programme-level follow-up actions.</p>
+              </article>
+              <article class="admin-row">
+                <strong>Action Plans</strong>
+                <span class="tag">Monitor</span>
+                <p>Track corrective actions from surveys, audits, and departmental reviews.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Compliance Tracking</h2>
+            </div>
+            <div class="stack">
+              <article class="admin-row">
+                <strong>UWI Self-Assessment Report</strong>
+                <span class="tag">Upcoming</span>
+                <p>Prepare institutional evidence, survey results, and department summaries.</p>
+              </article>
+              <article class="admin-row">
+                <strong>J-TEC Readiness</strong>
+                <span class="tag">Ongoing</span>
+                <p>Monitor programme files, lecturer records, assessment evidence, and policies.</p>
+              </article>
+              <article class="admin-row">
+                <strong>ISO 21001 Implementation</strong>
+                <span class="tag">Ongoing</span>
+                <p>Track learner support, communication, evidence, and continuous improvement.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Recent Feedback Summary</h2>
+          </div>
+          <div id="admin-feedback-list" class="stack"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js?v=4"></script>
+    <script>
+      if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+        navigator.serviceWorker.register('service-worker.js');
+      }
+    </script>
+  </body>
+</html>
